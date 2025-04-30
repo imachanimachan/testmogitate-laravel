@@ -3,8 +3,11 @@
 /public/build
 /public/hot
 /public/storage
-/storage/*.key
-/storage/pail
+#/storage/*.key 
+#/storage/pail
+/src/storage/*
+!/src/storage/img
+!/src/storage/img/*.png
 /vendor
 .env
 .env.backup
@@ -21,3 +24,4 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+docker/mysql/data/docker/mysql/data/
