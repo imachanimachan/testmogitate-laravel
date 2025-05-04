@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Season;
 
 class ProductController extends Controller
 {
@@ -31,7 +32,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('seasons')->find($id);
         return view('show', compact('product'));
     
     }
@@ -39,5 +40,14 @@ class ProductController extends Controller
     public function register()
     {
         return view('register');
+    }
+
+    public function create(Request $request)
+    {
+        $addproducts = $request->all();
+        Product::create($addproducts);
+
+        $products = Product::Paginate(6);
+        return view('index' , compact('products'));
     }
 }
