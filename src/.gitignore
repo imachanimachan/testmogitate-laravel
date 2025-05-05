@@ -6,8 +6,7 @@
 #/storage/*.key 
 #/storage/pail
 #/src/storage/*
-#/src/storage/img
-#/src/storage/img/*.png
+!storage/app/public/products/**
 /vendor
 .env
 .env.backup
