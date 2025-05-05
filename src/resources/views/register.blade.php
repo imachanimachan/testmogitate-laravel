@@ -25,16 +25,17 @@
 
         <div class="form-group">
             <label>商品画像 <span class="required">必須</span></label>
-            <input type="file" name="image">
+            <input type="file" name="image" value="{{ old('image') }}">
             @error('image')<span class="error">{{ $message }}</span>@enderror
         </div>
 
         <div class="form-group">
             <label>季節 <span class="required">必須</span> <small class="note">複数選択可</small></label>
             <div class="seasons">
-                @foreach(['春', '夏', '秋', '冬'] as $season) 
-                <label><input type="checkbox" name="seasons[]" value="{{ $season }}">
-                    {{ $season }}
+                @foreach($seasons as $season)
+                <label><input type="checkbox" name="seasons[]" value="{{ $season->id }}"
+                        {{ in_array($season->id, old('seasons', [])) ? 'checked' : '' }}>
+                    {{$season->name}}
                 </label>
                 @endforeach
             </div>

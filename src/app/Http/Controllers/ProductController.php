@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProdcutRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Season;
@@ -33,21 +34,61 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('seasons')->find($id);
-        return view('show', compact('product'));
+        $allseasons = Season::all();
+        return view('show', compact('product','allseasons'));
     
     }
     
     public function register()
     {
-        return view('register');
+        $seasons = Season::all();
+        return view('register',compact('seasons'));
     }
 
-    public function create(Request $request)
+    public function create(ProdcutRequest $request)
     {
-        $addproducts = $request->all();
-        Product::create($addproducts);
+        $path = $request->file('image')->store('products', 'public');
+
+        $product = Product::create([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'image' => $path,
+        ]);
+
+        if ($request->has('seasons')) {
+            $product->seasons()->sync($request->input('seasons'));
+        }
 
         $products = Product::Paginate(6);
         return view('index' , compact('products'));
+    }
+    public function updata(ProdcutRequest $request , $productId)
+    {
+        if ($request->has('back')) {
+            return redirect('/products');
+        }
+
+        $product = Product::findOrFail($productId);
+
+
+        $product->update([
+            'name' => $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'image' => $request->hasFile('image')
+                ? $request->file('image')->store('products', 'public')
+                : $product->image,
+        ]);
+        
+        $product->seasons()->sync($request->input('seasons'));
+
+        return redirect('/products');
+    }
+
+    public function destroy(Request $request)
+    {
+        Product::find($request->id)->delete();
+        return redirect('/products');
     }
 }

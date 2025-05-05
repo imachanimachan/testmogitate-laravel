@@ -18,8 +18,9 @@ return new class extends Migration
             $table->integer('price');
             $table->string('image', 255);
             $table->text('description');
-            $table->timestamps();
-        });
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();      
+          });
     }
 
     /**

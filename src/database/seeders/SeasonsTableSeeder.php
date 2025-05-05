@@ -19,8 +19,6 @@ class SeasonsTableSeeder extends Seeder
         foreach ($names as $name) {
             DB::table('seasons')->insert([
                 'name' => $name,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
             ]);
         }
     }

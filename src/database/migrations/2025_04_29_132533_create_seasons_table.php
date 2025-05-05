@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->unique();
-            $table->timestamps();
-        });
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+         });
     }
 
     /**

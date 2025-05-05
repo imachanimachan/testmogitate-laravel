@@ -88,3 +88,8 @@
     color: red;
     font-size: 20px;
 }
+
+.error {
+    color: red;
+    font-size: 13px;
+}
