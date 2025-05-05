@@ -5,7 +5,7 @@
 /public/storage
 #/storage/*.key 
 #/storage/pail
-/src/storage/*
+#/src/storage/*
 !/src/storage/img
 !/src/storage/img/*.png
 /vendor

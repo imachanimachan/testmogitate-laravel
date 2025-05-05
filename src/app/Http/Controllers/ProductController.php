@@ -63,7 +63,7 @@ class ProductController extends Controller
         $products = Product::Paginate(6);
         return view('index' , compact('products'));
     }
-    public function updata(ProdcutRequest $request , $productId)
+    public function update(ProdcutRequest $request , $productId)
     {
         if ($request->has('back')) {
             return redirect('/products');

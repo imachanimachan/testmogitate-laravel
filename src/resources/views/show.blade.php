@@ -11,7 +11,7 @@
          <a href="/products">商品一覧</a> > {{ $product->name}}
      </div>
 
-     <form method="POST" action="{{ route('updata' , ['productId' => $product->id]) }}" enctype="multipart/form-data">
+     <form method="POST" action="{{ route('update' , ['productId' => $product->id]) }}" enctype="multipart/form-data">
          @method('PATCH')
          @csrf
          <div class="product-edit">
