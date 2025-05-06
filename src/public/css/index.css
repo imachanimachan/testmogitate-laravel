@@ -1,12 +1,11 @@
 .add-btn {
-  float: right;
-  margin-bottom: 10px;
   background: orange;
   border: none;
   padding: 8px 12px;
   color: black;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: 1100px;
 }
 main {
   display: flex;
@@ -22,6 +21,8 @@ main {
   width: 100%;
   padding: 8px;
   margin-bottom: 8px;
+  border-radius: 20px;
+
 }
 
 .search-form button {
@@ -50,7 +51,7 @@ main {
 
 .card {
   background: white;
-  width: calc(33.333% - 10px);
+  width: calc(33% - 10px);
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(225, 220, 220, 0.1);
   overflow: hidden;
@@ -67,11 +68,48 @@ main {
   padding: 8px 12px;
 }
 
-.pagination {
-  margin-top: 20px;
-  text-align: center;
+.pagination .page-link {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 0 4px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid orange;
+  color: orange;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.pagination .page-link:hover {
+  background-color: orange;
+  color: white;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: orange;
+  color: white;
+  border: 1px solid orange;
 }
 
 a {
   text-decoration: none;
+}
+
+.filter-tags {
+    margin: 10px 0;
+}
+
+.tag {
+    display: inline-block;
+    background: #eee;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border-color: orange;
+    margin-right: 10px;
+}
+
+.tag .remove-tag {
+    margin-left: 10px;
+    text-decoration: none;
+    color: orange;
 }
