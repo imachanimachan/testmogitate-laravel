@@ -7,8 +7,8 @@ use App\Models\Season;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Carbon;
+//use Illuminate\Support\Facades\DB;
 
 
 class DatabaseSeeder extends Seeder
@@ -29,8 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductsTableSeeder::class);
         $this->call(SeasonsTableSeeder::class);
 
-        $products = Product::all();
-        $seasons = Season::all();
 
         $map = [
             'キウイ' => ['秋', '冬'],
@@ -46,16 +44,12 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($map as $productName => $seasonNames) {
-            $product = $products->where('name', $productName)->first();
-            $seasonIds = $seasons->whereIn('name', $seasonNames)->pluck('id')->toArray();
+                $product = Product::where('name', $productName)->first();
+                $seasonIds = Season::whereIn('name', $seasonNames)->pluck('id')->toArray();
 
-            foreach ($seasonIds as $seasonId) {
-                DB::table('product_season')->insert([
-                    'product_id' => $product->id,
-                    'season_id' => $seasonId,
-                ]);
+                $product->seasons()->sync($seasonIds);
             }
-        }
+           
     }
 
 }

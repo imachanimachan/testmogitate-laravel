@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+//use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
+use App\Models\Season;
+//use Illuminate\Support\Facades\DB;
+//se Illuminate\Support\Carbon;
 
 class SeasonsTableSeeder extends Seeder
 {
@@ -17,9 +18,7 @@ class SeasonsTableSeeder extends Seeder
         $names = [ "春", "夏" , "秋" , "冬" ];
 
         foreach ($names as $name) {
-            DB::table('seasons')->insert([
-                'name' => $name,
-            ]);
+            Season::create(['name' => $name]);
         }
     }
 }

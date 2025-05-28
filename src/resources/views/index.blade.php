@@ -15,7 +15,7 @@
         <label for="price-sort">価格順で表示</label>
         <select id="price-sort" name="sort">
             <option value="">価格で並べ替え</option>
-            <option value="asc" @selected(request('sort')==='asc' )>安い順</option>
+            <option value="asc" @selected(request('sort')==='asc' )>低い順</option>
             <option value="desc" @selected(request('sort')==='desc' )>高い順</option>
         </select>
     </form>
@@ -23,7 +23,7 @@
     @if(request('sort') === 'asc' || request('sort') === 'desc')
     <div class="filter-tags">
         <span class="tag">
-            {{ request('sort') === 'asc' ? '安い順' : '高い順' }}
+            {{ request('sort') === 'asc' ? '低い順' : '高い順' }}
             <a href="{{ route('search', array_merge(request()->except('sort'))) }}" class="remove-tag">×</a>
         </span>
     </div>
@@ -38,7 +38,7 @@
         @foreach($products as $product)
         <div class="card">
             <a href="{{ route('show' , ['productId' => $product->id]) }}">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{$product->name}}">
+                <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{$product->name}}">
                 <div class="info">
                     <p>{{$product->name}}</p>
                     <span>¥{{$product->price}}</span>
